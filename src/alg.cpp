@@ -34,7 +34,7 @@ int countPairs2(int* arr, int len, int value) {
             }
             k = k + lcount * rcount;
             l = l + lcount;
-            r = r + rcount;
+            r = r - rcount;
         } else if (suma < value) {
             l++;
         } else {
@@ -58,11 +58,9 @@ int countPairs3(int* arr, int len, int value) {
                     naytindex--;
                 }
                 break;
-            }
-            else if (arr[mid] < nayt) {
+            } else if (arr[mid] < nayt) {
                 l = mid + 1;
-            }
-            else {
+            } else {
                 r = mid - 1;
             }
         }
