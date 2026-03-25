@@ -1,4 +1,19 @@
 // Copyright 2021 NNTU-CS
+
+int binarySearch(int* arr, int left, int right, int target) {
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] == target) {
+            return mid;
+        } else if (arr[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}
+
 int countPairs1(int* arr, int len, int value) {
     int k = 0;
     for (int i = 0; i < len; i++) {
@@ -53,22 +68,13 @@ int countPairs3(int* arr, int len, int value) {
     int k = 0;
     for (int i = 0; i < len; i++) {
         int nayt = value - arr[i];
-        int left = i + 1;
-        int right = len - 1;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (arr[mid] == nayt) {
+        int pos = binarySearch(arr, i + 1, len - 1, nayt);
+        if (pos != -1) {
+            k++;
+            int j = pos + 1;
+            while (j < len && arr[j] == nayt) {
                 k++;
-                int j = mid + 1;
-                while (j < len && arr[j] == nayt) {
-                    k++;
-                    j++;
-                }
-                break;
-            } else if (arr[mid] < nayt) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
+                j++;
             }
         }
     }
